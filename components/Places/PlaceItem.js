@@ -1,6 +1,6 @@
 import { View, Image, Text, Pressable, StyleSheet } from "react-native";
 
-function PlaceItem({ onSelect }) {
+function PlaceItem({ place, onSelect }) {
   const { ImageUri, title, address } = place;
 
   return (
