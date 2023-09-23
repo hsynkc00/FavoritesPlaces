@@ -1,4 +1,5 @@
 import { FlatList, View, Text, StyleSheet } from "react-native";
+import { Colors } from "../../constants/colors";
 
 import PlaceItem from "./PlaceItem";
 
@@ -29,5 +30,6 @@ styles = StyleSheet.create({
   },
   fallBackText: {
     fontSize: 16,
+    color: Colors.primary100,
   },
 });
