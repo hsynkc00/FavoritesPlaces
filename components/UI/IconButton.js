@@ -14,7 +14,6 @@ function IconButton({ icon, size, color, onPress }) {
 
 styles = StyleSheet.create({
   button: {
-    margin: 4,
     padding: 8,
     justifyContent: "center",
     alignItems: "center",
