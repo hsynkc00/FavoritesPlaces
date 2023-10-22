@@ -1,4 +1,4 @@
-import { View, Button, Text, Alert, Image, StyleSheet } from "react-native";
+import { View, Text, Alert, Image, StyleSheet } from "react-native";
 import {
   launchCameraAsync,
   useCameraPermissions,
@@ -8,11 +8,12 @@ import { useState } from "react";
 import { Colors } from "../../constants/colors";
 import OutlinedButton from "../UI/OutlinedButton";
 
-function ImagePicker() {
+function ImagePicker({ onTakeImage }) {
   const [pickedImage, setPickedImage] = useState();
 
   const [cameraPermissionsInformation, requestPermission] =
     useCameraPermissions();
+
   async function verifyPermission() {
     if (cameraPermissionsInformation.status === PermissionStatus.UNDETERMINED) {
       // we don't know yet if we have access or not
@@ -20,6 +21,7 @@ function ImagePicker() {
 
       return permissionResponse.granted;
     }
+
     if (cameraPermissionsInformation.status === PermissionStatus.DENIED) {
       Alert.alert(
         "Permission Denied!",
@@ -27,8 +29,10 @@ function ImagePicker() {
       );
       return false;
     }
+
     return true;
   }
+
   async function takeImageHandler() {
     const hasPermission = await verifyPermission();
 
@@ -41,7 +45,9 @@ function ImagePicker() {
       aspect: [16, 9],
       quality: 0.5,
     });
-    setPickedImage(image.uri);
+    const selectedImageUri = image.assets[0].uri;
+    setPickedImage(selectedImageUri);
+    onTakeImage(selectedImageUri);
   }
 
   const renderImagePreview = () => {

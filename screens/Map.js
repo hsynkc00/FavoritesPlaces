@@ -15,10 +15,10 @@ function Map({ navigation }) {
   };
 
   function selectLocationHandler(event) {
-    const ltd = event.nativeEvent.coordinate.latitude;
+    const lat = event.nativeEvent.coordinate.latitude;
     const lng = event.nativeEvent.coordinate.longitude;
 
-    setSelectedLocation({ ltd: ltd, lng: lng });
+    setSelectedLocation({ lat: lat, lng: lng });
   }
 
   const saveSelectedLocationHandler = useCallback(() => {
@@ -30,7 +30,7 @@ function Map({ navigation }) {
       return;
     }
     navigation.navigate("AddPlace", {
-      pickedLtd: selectedLocation.ltd,
+      pickedLat: selectedLocation.lat,
       pickedLng: selectedLocation.lng,
     });
   }, [navigation, selectedLocation]);
@@ -58,7 +58,7 @@ function Map({ navigation }) {
         <Marker
           title="Picked Location"
           coordinate={{
-            latitude: selectedLocation.ltd,
+            latitude: selectedLocation.lat,
             longitude: selectedLocation.lng,
           }}
         />
